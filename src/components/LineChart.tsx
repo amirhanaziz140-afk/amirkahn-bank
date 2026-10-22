@@ -22,7 +22,11 @@ export default function LineChart({ data, selected, width, height }: Props) {
     y: PAD_Y + (1 - (v - min) / range) * (height - PAD_Y * 2),
   }));
 
+<<<<<<< HEAD
   // Catmull-Rom -> Bezier: тегіс 
+=======
+  // Catmull-Rom -> Bezier: тегіс қисық
+>>>>>>> 401dc14 (first commit)
   let d = `M${pts[0].x},${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const p0 = pts[i - 1] ?? pts[i];

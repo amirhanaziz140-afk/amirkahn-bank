@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "src",
+			"path": "../Bankpick/src"
+		},
+		{
+			"name": "bank",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

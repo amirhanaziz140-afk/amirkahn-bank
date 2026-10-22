@@ -1,20 +1,32 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+} from '@expo-google-fonts/poppins';
+import AppNavigator from './src/navigation/AppNavigator';
+import { colors } from './src/theme/colors';
+
+const theme = {
+  ...DefaultTheme,
+  colors: { ...DefaultTheme.colors, background: colors.background },
+};
 
 export default function App() {
+  const [loaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold });
+
+  if (!loaded) return null;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer theme={theme}>
+        <StatusBar style="dark" />
+        <AppNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
