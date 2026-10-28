@@ -1,29 +1,29 @@
 export const user = {
-  name: 'dennis nzioki',
-  fullName: 'Dennis Nzioki',
-  role: 'Senior Designer',
-  email: 'dennisnzioki@gmail.com',
-  phone: '+15401712663389',
-  birth: ['28', 'September', '2000'] as [string, string, string],
+  name: 'Aziz Amirkhan ',
+  fullName: 'Aziz Amirkhanov',
+  role: 'Student',
+  email: 'amirhanaziz140@gmail.com',
+  phone: '+7 708346 2990',
+  birth: ['20', 'June', '2008'] as [string, string, string],
   joined: '28 Jan 2021',
   avatar: 'https://i.pravatar.cc/200?img=12',
 };
 
 export const contacts = [
-  { id: '1', name: 'Yamilet', avatar: 'https://i.pravatar.cc/200?img=11' },
-  { id: '2', name: 'Alexa', avatar: 'https://i.pravatar.cc/200?img=15' },
-  { id: '3', name: 'Yakub', avatar: 'https://i.pravatar.cc/200?img=13' },
-  { id: '4', name: 'Krishna', avatar: 'https://i.pravatar.cc/200?img=14' },
-  { id: '5', name: 'Maria', avatar: 'https://i.pravatar.cc/200?img=5' },
+  { id: '1', name: 'Zharkyn', avatar: 'https://i.pravatar.cc/200?img=11' },
+  { id: '2', name: 'Mereke', avatar: 'https://i.pravatar.cc/200?img=15' },
+  { id: '3', name: 'Ardak', avatar: 'https://i.pravatar.cc/200?img=13' },
+  { id: '4', name: 'Kairat', avatar: 'https://i.pravatar.cc/200?img=14' },
+  { id: '5', name: 'Merey', avatar: 'https://i.pravatar.cc/200?img=5' },
 ];
 
 export const languages = [
   { id: 'en', name: 'English', flag: '🇺🇸' },
-  { id: 'au', name: 'Australia', flag: '🇦🇺' },
-  { id: 'fr', name: 'French', flag: '🇫🇷' },
-  { id: 'es', name: 'Spanish', flag: '🇪🇸' },
-  { id: 'am', name: 'Armenian', flag: '🇦🇲' },
-  { id: 'vn', name: 'Vietnam', flag: '🇻🇳' },
+  { id: 'au', name: 'Kazakhstan', flag: '🇦🇺' },
+  { id: 'fr', name: 'Azerbaijan', flag: '🇫🇷' },
+  { id: 'es', name: 'kyrgyzstan', flag: '🇪🇸' },
+  { id: 'am', name: 'Armenia', flag: '🇦🇲' },
+  { id: 'vn', name: 'Russia', flag: '🇻🇳' },
 ];
 
 export const months = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
