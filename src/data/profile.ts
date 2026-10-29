@@ -18,8 +18,8 @@ export const contacts = [
 ];
 
 export const languages = [
-  { id: 'en', name: 'English', flag: '🇺🇸' },
-  { id: 'au', name: 'Kazakhstan', flag: '🇦🇺' },
+  { id: 'en', name: 'English', flag: 'kz' },
+  { id: 'au', name: 'Kazakhstan', flag: 'kz' },
   { id: 'fr', name: 'Azerbaijan', flag: '🇫🇷' },
   { id: 'es', name: 'kyrgyzstan', flag: '🇪🇸' },
   { id: 'am', name: 'Armenia', flag: '🇦🇲' },
