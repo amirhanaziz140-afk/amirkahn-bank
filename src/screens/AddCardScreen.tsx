@@ -25,14 +25,14 @@ export default function AddCardScreen() {
 
   const onAdd = () => {
     if (number.replace(/\s/g, '').length < 16 || !holder || expiry.length < 5 || cvv.length < 3) {
-      return Alert.alert('Add New Card', 'Барлық өрісті толтырыңыз');
+      return Alert.alert('жана карта косу', 'Барлық өрісті толтырыңыз');
     }
-    Alert.alert('Add New Card', 'Карта қосылды', [{ text: 'OK', onPress: () => navigation.goBack() }]);
+    Alert.alert('жана карта косу', 'Карта қосылды', [{ text: 'OK', onPress: () => navigation.goBack() }]);
   };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      <ScreenHeader title="Add New Card" />
+      <ScreenHeader title="жана карта косу" />
 
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
         <BalanceCard
