@@ -10,7 +10,7 @@ import ScreenHeader from '../components/ScreenHeader';
 import CircleButton from '../components/CircleButton';
 import BalanceCard from '../components/BalanceCard';
 import TransactionItem from '../components/TransactionItem';
-import { cards } from '../data/cards';
+import { useAppData } from '../state/AppDataContext';
 import { transactions } from '../data/transactions';
 
 const MAX = 10000;
@@ -18,6 +18,7 @@ const MAX = 10000;
 export default function MyCardsScreen() {
   const navigation = useNavigation<any>();
   const [limit, setLimit] = useState(4600);
+  const { cards } = useAppData();
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>

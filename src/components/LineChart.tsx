@@ -13,12 +13,14 @@ const PAD_X = 10;
 const PAD_Y = 22;
 
 export default function LineChart({ data, selected, width, height }: Props) {
+  if (data.length === 0 || width <= PAD_X * 2 || height <= PAD_Y * 2) return null;
+
   const min = Math.min(...data);
   const max = Math.max(...data);
   const range = max - min || 1;
 
   const pts = data.map((v, i) => ({
-    x: PAD_X + (i / (data.length - 1)) * (width - PAD_X * 2),
+    x: PAD_X + (i / Math.max(data.length - 1, 1)) * (width - PAD_X * 2),
     y: PAD_Y + (1 - (v - min) / range) * (height - PAD_Y * 2),
   }));
 
@@ -36,7 +38,7 @@ export default function LineChart({ data, selected, width, height }: Props) {
     d += ` C${c1x},${c1y} ${c2x},${c2y} ${p2.x},${p2.y}`;
   }
   const area = `${d} L${pts[pts.length - 1].x},${height} L${pts[0].x},${height} Z`;
-  const sel = pts[selected];
+  const sel = pts[Math.max(0, Math.min(selected, pts.length - 1))];
 
   return (
     <Svg width={width} height={height}>

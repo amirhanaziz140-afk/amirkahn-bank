@@ -54,7 +54,7 @@ export default function StatisticsScreen() {
         </View>
 
         <View style={{ paddingHorizontal: 20 }}>
-          <SectionHeader title="Transaction" action="Sell All" onAction={() => navigation.navigate('Transactions')} />
+          <SectionHeader title="Transaction" action="See All" onAction={() => navigation.navigate('Transactions')} />
           {transactions.slice(0, 4).map(t => (
             <TransactionItem key={t.id} item={t} />
           ))}

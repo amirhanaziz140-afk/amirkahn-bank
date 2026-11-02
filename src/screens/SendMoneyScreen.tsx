@@ -8,7 +8,7 @@ import { fonts } from '../theme/fonts';
 import ScreenHeader from '../components/ScreenHeader';
 import BalanceCard from '../components/BalanceCard';
 import PrimaryButton from '../components/PrimaryButton';
-import { cards } from '../data/cards';
+import { useAppData } from '../state/AppDataContext';
 import { contacts } from '../data/profile';
 
 export default function SendMoneyScreen() {
@@ -17,11 +17,15 @@ export default function SendMoneyScreen() {
   const cardWidth = width - 40;
   const [selected, setSelected] = useState<string | null>(contacts[0].id);
   const [amount, setAmount] = useState('36.00');
+  const { cards } = useAppData();
 
   const onSend = () => {
     const to = contacts.find(c => c.id === selected);
     if (!to) return Alert.alert('Send Money', 'Алушыны таңдаңыз');
-    Alert.alert('Send Money', `${to.name} — USD ${amount} жіберілді`, [
+    if (!Number.isFinite(Number(amount)) || Number(amount) <= 0) {
+      return Alert.alert('Send Money', 'Дұрыс сома енгізіңіз');
+    }
+    Alert.alert('Send Money', `Демо режимі: ${to.name} — USD ${amount}. Нақты ақша жіберілген жоқ.`, [
       { text: 'OK', onPress: () => navigation.goBack() },
     ]);
   };

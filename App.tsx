@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
@@ -8,25 +9,36 @@ import {
   Poppins_500Medium,
   Poppins_600SemiBold,
 } from '@expo-google-fonts/poppins';
+
 import AppNavigator from './src/navigation/AppNavigator';
+import { AppDataProvider } from './src/state/AppDataContext';
 import { colors } from './src/theme/colors';
 
 const theme = {
   ...DefaultTheme,
-  colors: { ...DefaultTheme.colors, background: colors.background },
+  colors: {
+    ...DefaultTheme.colors,
+    background: colors.background,
+  },
 };
 
 export default function App() {
-  const [loaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold });
+  const [loaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+  });
 
   if (!loaded) return null;
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer theme={theme}>
-        <StatusBar style="dark" />
-        <AppNavigator />
-      </NavigationContainer>
+      <AppDataProvider>
+        <NavigationContainer theme={theme}>
+          <StatusBar style="dark" />
+          <AppNavigator />
+        </NavigationContainer>
+      </AppDataProvider>
     </SafeAreaProvider>
   );
 }

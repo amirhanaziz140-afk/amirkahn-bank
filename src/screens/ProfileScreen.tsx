@@ -7,7 +7,7 @@ import { colors } from '../theme/colors';
 import { fonts } from '../theme/fonts';
 import ScreenHeader from '../components/ScreenHeader';
 import CircleButton from '../components/CircleButton';
-import { user } from '../data/profile';
+import { useAppData } from '../state/AppDataContext';
 
 const items: { label: string; icon: string; route?: string; badge?: number }[] = [
   { label: 'Personal Information', icon: 'person-circle-outline', route: 'EditProfile' },
@@ -21,6 +21,7 @@ const items: { label: string; icon: string; route?: string; badge?: number }[] =
 
 export default function ProfileScreen() {
   const navigation = useNavigation<any>();
+  const { profile } = useAppData();
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -35,10 +36,10 @@ export default function ProfileScreen() {
 
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }} showsVerticalScrollIndicator={false}>
         <View style={styles.user}>
-          <Image source={{ uri: user.avatar }} style={styles.avatar} />
+          <Image source={{ uri: profile.avatar }} style={styles.avatar} />
           <View style={{ marginLeft: 20 }}>
-            <Text style={styles.name}>{user.name}</Text>
-            <Text style={styles.role}>{user.role}</Text>
+            <Text style={styles.name}>{profile.name}</Text>
+            <Text style={styles.role}>{profile.role}</Text>
           </View>
         </View>
 

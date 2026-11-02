@@ -4,12 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../theme/colors';
 import ScreenHeader from '../components/ScreenHeader';
-import BalanceCard, { MastercardLogo } from '../components/BalanceCard';
+import BalanceCard from '../components/BalanceCard';
 import FormField from '../components/FormField';
 import PrimaryButton from '../components/PrimaryButton';
+import { useAppData } from '../state/AppDataContext';
 
-const formatNumber = (text: string) =>
-  text.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+const formatLastFour = (text: string) => text.replace(/\D/g, '').slice(0, 4);
 
 const formatExpiry = (text: string) => {
   const d = text.replace(/\D/g, '').slice(0, 4);
@@ -18,16 +18,33 @@ const formatExpiry = (text: string) => {
 
 export default function AddCardScreen() {
   const navigation = useNavigation();
+  const { addCard } = useAppData();
   const [holder, setHolder] = useState('');
   const [expiry, setExpiry] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [number, setNumber] = useState('');
+  const [lastFour, setLastFour] = useState('');
 
   const onAdd = () => {
-    if (number.replace(/\s/g, '').length < 16 || !holder || expiry.length < 5 || cvv.length < 3) {
-      return Alert.alert('Add New Card', 'Барлық өрісті толтырыңыз');
+    const digits = lastFour.replace(/\D/g, '');
+    const [month, year] = expiry.split('/').map(Number);
+    const today = new Date();
+    const validExpiry = month >= 1 && month <= 12 && Number.isInteger(year) &&
+      (2000 + year > today.getFullYear() ||
+        (2000 + year === today.getFullYear() && month >= today.getMonth() + 1));
+    if (digits.length !== 4 || !holder.trim() || !validExpiry) {
+      Alert.alert('Add New Card', 'Картаның соңғы 4 санын, иесінің атын және жарамды MM/YY мерзімін енгізіңіз.');
+      return;
     }
-    Alert.alert('Add New Card', 'Карта қосылды', [{ text: 'OK', onPress: () => navigation.goBack() }]);
+    // Demo-only: store the last four digits; never ask for/store full PAN or CVV.
+    addCard({
+      type: 'mastercard',
+      number: `•••• •••• •••• ${digits}`,
+      holder: holder.trim(),
+      expiry,
+      cvv: '•••',
+    });
+    Alert.alert('Add New Card', 'Демо картасы қосылды. Қосымшаны жапқанда өзгеріс сақталмайды.', [
+      { text: 'OK', onPress: () => navigation.goBack() },
+    ]);
   };
 
   return (
@@ -38,10 +55,10 @@ export default function AddCardScreen() {
         <BalanceCard
           card={{
             type: 'mastercard',
-            number: number || '0000 0000 0000 0000',
+            number: `•••• •••• •••• ${lastFour || '••••'}`,
             holder,
             expiry: expiry || 'MM/YY',
-            cvv: cvv || '000',
+            cvv: '•••',
           }}
         />
 
@@ -57,25 +74,16 @@ export default function AddCardScreen() {
               placeholder="MM/YY"
               keyboardType="number-pad"
             />
-            <FormField
-              label="4-digit CVV"
-              containerStyle={{ flex: 1 }}
-              value={cvv}
-              onChangeText={t => setCvv(t.replace(/\D/g, '').slice(0, 4))}
-              placeholder="0000"
-              keyboardType="number-pad"
-              secureTextEntry
-            />
+
           </View>
 
           <FormField
-            label="Card Number"
+            label="Card Last 4 Digits (Demo)"
             icon="card-outline"
-            value={number}
-            onChangeText={t => setNumber(formatNumber(t))}
-            placeholder="0000 0000 0000 0000"
+            value={lastFour}
+            onChangeText={t => setLastFour(formatLastFour(t))}
+            placeholder="1234"
             keyboardType="number-pad"
-            right={<MastercardLogo size={20} />}
           />
         </View>
       </ScrollView>

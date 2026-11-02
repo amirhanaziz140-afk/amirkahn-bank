@@ -3,6 +3,8 @@ import { View, Text, Pressable, Switch, ScrollView, StyleSheet } from 'react-nat
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useAppData } from '../state/AppDataContext';
+import { languages } from '../data/profile';
 import { colors } from '../theme/colors';
 import { fonts } from '../theme/fonts';
 import ScreenHeader from '../components/ScreenHeader';
@@ -21,6 +23,8 @@ function Row({ label, value, onPress }: { label: string; value?: string; onPress
 export default function SettingsScreen() {
   const navigation = useNavigation<any>();
   const [biometric, setBiometric] = useState(false);
+  const { languageId } = useAppData();
+  const languageName = languages.find(language => language.id === languageId)?.name ?? 'English';
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -35,7 +39,7 @@ export default function SettingsScreen() {
 
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }} showsVerticalScrollIndicator={false}>
         <Text style={styles.group}>General</Text>
-        <Row label="Language" value="English" onPress={() => navigation.navigate('Language')} />
+        <Row label="Language" value={languageName} onPress={() => navigation.navigate('Language')} />
         <Row label="My Profile" onPress={() => navigation.navigate('Profile')} />
         <Row label="Contact Us" />
 

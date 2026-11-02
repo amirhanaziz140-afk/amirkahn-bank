@@ -6,10 +6,11 @@ import { colors } from '../theme/colors';
 import ScreenHeader from '../components/ScreenHeader';
 import BalanceCard from '../components/BalanceCard';
 import PrimaryButton from '../components/PrimaryButton';
-import { cards } from '../data/cards';
+import { useAppData } from '../state/AppDataContext';
 
 export default function AllCardsScreen() {
   const navigation = useNavigation<any>();
+  const { cards } = useAppData();
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>

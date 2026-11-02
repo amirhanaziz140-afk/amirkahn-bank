@@ -17,10 +17,15 @@ export default function RequestMoneyScreen() {
   const [due, setDue] = useState<[string, string, string]>(['28', '09', '2000']);
   const [amount, setAmount] = useState('26.00');
 
-  const onSend = () =>
-    Alert.alert('Request Money', `${payer} — USD ${amount} сұралды`, [
+  const onSend = () => {
+    if (!payer.trim() || !email.includes('@') || !Number.isFinite(Number(amount)) || Number(amount) <= 0) {
+      Alert.alert('Request Money', 'Аты, email және оң соманы дұрыс толтырыңыз');
+      return;
+    }
+    Alert.alert('Request Money', `Демо режимі: ${payer} — USD ${amount}. Нақты сұрау жіберілген жоқ.`, [
       { text: 'OK', onPress: () => navigation.goBack() },
     ]);
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
@@ -52,7 +57,7 @@ export default function RequestMoneyScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <PrimaryButton label="Send Money" onPress={onSend} />
+        <PrimaryButton label="Request Money" onPress={onSend} />
       </View>
     </SafeAreaView>
   );

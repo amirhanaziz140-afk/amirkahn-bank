@@ -6,9 +6,10 @@ import { colors } from '../theme/colors';
 import { fonts } from '../theme/fonts';
 import ScreenHeader from '../components/ScreenHeader';
 import { languages } from '../data/profile';
+import { useAppData } from '../state/AppDataContext';
 
 export default function LanguageScreen() {
-  const [selected, setSelected] = useState('en');
+  const { languageId: selected, setLanguageId: setSelected } = useAppData();
   const [query, setQuery] = useState('');
 
   const data = languages.filter(l => l.name.toLowerCase().includes(query.trim().toLowerCase()));
