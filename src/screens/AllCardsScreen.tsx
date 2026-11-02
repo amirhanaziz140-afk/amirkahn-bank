@@ -11,7 +11,6 @@ import { cards } from '../data/cards';
 export default function AllCardsScreen() {
   const navigation = useNavigation<any>();
 
-
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <ScreenHeader title="All Cards" />
